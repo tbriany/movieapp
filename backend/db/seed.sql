@@ -7,7 +7,7 @@ CREATE TABLE movieLikes
 (
     id SERIAL PRIMARY KEY,
     movie_title VARCHAR UNIQUE NOT NULL, 
-    likes INT, 
-    dislikes INT 
+    thumbs_up INT, 
+    thumbs_down INT 
 );
 
