@@ -69,6 +69,7 @@ const updateDislikes = async (title) => {
 
 module.exports = {
     getAllMovies,
+    checkIfExists,
     addNewMovie,
     updateLikes,
     updateDislikes
