@@ -24,12 +24,22 @@ const checkIfExists = async (title) => {
     return await db.any(checkIfExists, {title});
 }
 
+const getMovieInfo = async (title) => {
+    console.log('gets movie info')
+    const movieInfo = `
+    SELECT *
+     FROM movieLikes 
+     WHERE movie_title = $/title/
+    `
+    return await db.any(movieInfo, {title});
+}
+
 // add new movie 
 const addNewMovie = async (title, thumbs_up, thumbs_down) => {
     console.log('adds new movie to database')
     const addNewMovie = `
     INSERT INTO movieLikes 
-    (movie_title, likes, dislikes)
+    (movie_title, thumbs_up, thumbs_down)
     VALUES 
     ($/title/, $/thumbs_up/, $/thumbs_down/)
     RETURNING *
@@ -70,6 +80,7 @@ const updateDislikes = async (title) => {
 module.exports = {
     getAllMovies,
     checkIfExists,
+    getMovieInfo,
     addNewMovie,
     updateLikes,
     updateDislikes
