@@ -2,7 +2,10 @@
 
 Movieapp is an app that allows users to search a movie title, look through results and select a movie. Users are able to go to the movie page and see additional information about the movie. 
 
-Built with React.js, Node.js with Express, PostgreSQL. 
+Built with React.js, Node.js with Express, PostgreSQL, and bootstrap.
+
+![homepage](./assets/landingpage.png)
+![moviepage](./assets/moviepage.png)
 
 ## Features
 
@@ -18,6 +21,7 @@ Users are able to:
 * React.js. For the front-end/client interface of the app.
 * Node.js & Express.js. For the HTTP backend server.
 * PostgreSQL. As the relation database management system.
+* Bootstrap. For the styling of the app.
 
 
 ##  Local Setup
