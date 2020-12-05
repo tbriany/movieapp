@@ -3,16 +3,15 @@ const db = require('../db/db')
 
 // get all movies 
 const getAllMovies = async () => {
-    console.log('gets all movies')
     const getAllMovies = `
-    SELECT * FROM movieLikes
+    SELECT movie_title 
+    FROM movieLikes
     `;
   return await db.any(getAllMovies);
 }
 
 // check if movie exists in database 
 const checkIfExists = async (title) => {
-    console.log('checks if movie exists')
     const checkIfExists = `
     SELECT exists 
     (SELECT 1 
@@ -25,7 +24,6 @@ const checkIfExists = async (title) => {
 }
 
 const getMovieInfo = async (title) => {
-    console.log('gets movie info')
     const movieInfo = `
     SELECT *
      FROM movieLikes 
@@ -36,7 +34,6 @@ const getMovieInfo = async (title) => {
 
 // add new movie 
 const addNewMovie = async (title, thumbs_up, thumbs_down) => {
-    console.log('adds new movie to database')
     const addNewMovie = `
     INSERT INTO movieLikes 
     (movie_title, thumbs_up, thumbs_down)
