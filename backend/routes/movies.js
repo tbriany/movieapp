@@ -49,38 +49,49 @@ const checkIfMovieExists = async (req, res, next) => {
     if (movieExists) {
       next()
     } else {
-      res.status(400).json({
-        message: `Movie title ${title} does not exist in database. Please add it.`
-      });
+      await movieQueries.addNewMovie(title, 0, 0);
+      next()
     }
   } catch (err) {
     console.log(err)
   }
 }
 
-router.get("/info/:title", checkIfMovieExists, async (req, res, next) => {
-  const { title} = req.params
-  try {
-    const movieInfo = await movieQueries.getMovieInfo(title);
+router.get("/info/:title", async (req, res, next) => {
+  const { title } = req.params
+  let movieExists = await movieQueries.checkIfExists(title);
+  movieExists = movieExists[0].exists
+  if (movieExists) {
+    try {
+      const movieInfo = await movieQueries.getMovieInfo(title);
+      res.status(200).json({
+        message: `Retrieved movie info for title ${title}`,
+        payload: movieInfo
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  } else {
     res.status(200).json({
       message: `Retrieved movie info for title ${title}`,
-      payload: movieInfo
+      payload: [{
+        "thumbs_up": 0,
+        "thumbs_down": 0
+      }]
     });
-  } catch (err) {
-    console.log(err)
   }
 });
 
 
 // update likes 
 router.post("/updateLikes/:title", checkIfMovieExists, async (req, res, next) => {
-  const { title} = req.params
+  const { title } = req.params
   try {
-      const updateLikes = await movieQueries.updateLikes(title);
-      res.status(200).json({
-        message: `New thumbs_up for movie titled ${title}`,
-        payload: updateLikes
-      });
+    const updateLikes = await movieQueries.updateLikes(title);
+    res.status(200).json({
+      message: `New thumbs_up for movie titled ${title}`,
+      payload: updateLikes
+    });
   } catch (err) {
     console.log(err)
   }
@@ -89,13 +100,13 @@ router.post("/updateLikes/:title", checkIfMovieExists, async (req, res, next) =>
 
 // update dislikes 
 router.post("/updateDislikes/:title", checkIfMovieExists, async (req, res, next) => {
-  const { title} = req.params 
+  const { title } = req.params
   try {
-      const updateDislikes = await movieQueries.updateDislikes(title);
-      res.status(200).json({
-        message: `New thumbs_down for movie titled ${title}`,
-        payload: updateDislikes
-      });
+    const updateDislikes = await movieQueries.updateDislikes(title);
+    res.status(200).json({
+      message: `New thumbs_down for movie titled ${title}`,
+      payload: updateDislikes
+    });
   } catch (err) {
     console.log(err)
   }
