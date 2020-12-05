@@ -2,6 +2,7 @@ import '../App.css';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+// import 'bootstrap/dist/css/bootstrap.css';
 
 function SearchBar() {
 
@@ -24,6 +25,7 @@ function SearchBar() {
         }).catch(function (error) {
             console.error(error);
         });
+        setInput("")
     }
 
     const handleInput = (event) => {
@@ -39,7 +41,7 @@ function SearchBar() {
     const mappedResults = results.map(el => {
         if (el.Poster === "N/A") {
             return (
-                <Link to={`/movie/${el.imdbID}`} key={el.imdbID}>
+                <Link to={`/movie/${el.imdbID}`} key={el.imdbID} style={{margin: "10%"}}>
                     <div key={el.imdbID}>
                         <h4>{el.Title}</h4>
                     </div>
@@ -47,7 +49,7 @@ function SearchBar() {
             )
         } else {
             return (
-                <Link to={`/movie/${el.imdbID}`} key={el.imdbID}>
+                <Link to={`/movie/${el.imdbID}`} key={el.imdbID} style={{margin: "10%"}}>
                     <div key={el.imdbID}>
                         <h4>{el.Title}</h4>
                         <img src={el.Poster} alt={el.Title}></img>
@@ -58,14 +60,15 @@ function SearchBar() {
     })
 
     return (
-        <div className="searchBar">
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Movie title:
-                    <input type="text" name="title" onChange={handleInput} />
+        <div className="container-sm" style={{marginTop: "5%"}}>
+            <h1 className="display-3"> Welcome to movie app!</h1>
+            <form onSubmit={handleSubmit} className="form-group">
+                <label for="title">
+                    <input type="text" className="form-control" name="title" placeHolder="Search a movie title" onChange={handleInput} />
                 </label>
-                <input type="submit" value="Submit" />
+                <button type="button" class="btn btn-dark" onClick={handleSubmit}>Submit</button>
             </form>
+
             <ul>
                 {mappedResults}
             </ul>

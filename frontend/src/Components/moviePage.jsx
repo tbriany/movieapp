@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -67,30 +67,37 @@ function MoviePage(props) {
         }
         setDislikes(prev => prev + 1)
         getMovieInfo()
-}
+    }
 
-return (
-    <div className="moviePage">
-        <div>
-        <Link to={`/`}> Back to search </Link>
-            <h2>{movie.Title}</h2>
-            <img src={movie.Poster} alt={movie.Title}></img>
-            <div>
-                <span>
-                    {likes} likes
-                <FontAwesomeIcon icon={faThumbsUp} onClick={addLike} style={{ padding: "15px" }} />
-                </span>
-                <span>
-                    {dislikes} dislikes
-                <FontAwesomeIcon icon={faThumbsDown} onClick={addDislike} style={{ padding: "15px" }} />
-                </span>
+    return (
+        <div className="moviePage">
+            <Link to={`/`} className="stretched-link" style={{ float: "right" }}> Back to search </Link>
+            <div style={{ alignContent: "center", marginTop: "5%" }} >
+                <div className='jumbotron text-center' style={{ backgroundColor: "transparent", display: "inline" }}>
+
+                    <h2>{movie.Title}</h2>
+                    <img src={movie.Poster} alt={movie.Title}></img>
+                    <div>
+                        <span>
+                            {likes} likes
+                <button className='btn btn-light' style={{ borderColor: "#5bc0de" }} onClick={addLike}>
+                                <FontAwesomeIcon icon={faThumbsUp} style={{ height: "15px" }} />
+                            </button>
+                        </span>
+                        <span>
+                            {dislikes} dislikes
+                        <button className='btn btn-light' style={{ borderColor: "#5bc0de" }} onClick={addDislike}>
+                                <FontAwesomeIcon icon={faThumbsDown} onClick={addDislike} style={{ height: "15px" }} />
+                            </button>
+                        </span>
+                    </div>
+                    <h4>Director: {movie.Director} </h4>
+                    <h4>Release Year: {movie.Year}</h4>
+                    <p>Plot: {movie.Plot}</p>
+                </div>
             </div>
-            <h4>Director: {movie.Director} </h4>
-            <h4>Release Year: {movie.Year}</h4>
-            <p>Plot: {movie.Plot}</p>
         </div>
-    </div>
-);
+    );
 }
 
 export default MoviePage;
