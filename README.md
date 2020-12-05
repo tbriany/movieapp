@@ -4,7 +4,7 @@ Movieapp is an app that allows users to search a movie title, look through resul
 
 Built with React.js, Node.js with Express, PostgreSQL, and bootstrap.
 
-![homepage](./assets/landingpage.png)
+![homepage](./assets/homepage.png)
 ![moviepage](./assets/moviepage.png)
 
 ## Features
