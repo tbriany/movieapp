@@ -1,4 +1,4 @@
-# movieapp
+# Movieapp
 
 Movieapp is an app that allows users to search a movie title, look through results and select a movie. Users are able to go to the movie page and see additional information about the movie. 
 
